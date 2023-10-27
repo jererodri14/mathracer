@@ -2,7 +2,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import WelcomePage from "./pages/welcomePage/welcomePage";
 import LogInPage from "./pages/LogIn/logIn";
-import { StatusBar } from 'react-native';
+import { StatusBar, AppLoading } from 'react-native';
 
 export default function App() {
   return (
@@ -18,4 +18,5 @@ export default function App() {
 }
 
 const Stack = createStackNavigator();
+
 

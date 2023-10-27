@@ -1,5 +1,4 @@
 import { View, ImageBackground, Animated, Easing,Pressable } from 'react-native';
-import React from 'react';
 import { useEffect } from 'react';
 
 export default function WelcomePage({navigation}){
@@ -24,13 +23,13 @@ export default function WelcomePage({navigation}){
     };
   
     useEffect(() => {
-      fadeIn(); // Iniciar la animación cuando se monta el componente
+      fadeIn();
     }, []);
     return(
         <View>
             <Pressable onPress={() => navigation.navigate('LogIn')}>
-                <ImageBackground source={require('../../assets/welcome.png')} resizeMode="stretch" style={{ height: '100%', justifyContent: 'center' }}>
-                    <Animated.Text style={{ textAlign: 'center', fontSize: 30, color: 'white', fontWeight: 'bold', marginTop: 100, backgroundColor: 'lightblue', opacity: textOpacity }}>
+                <ImageBackground source={require('../../assets/welcome.png')} resizeMode="cover" style={{ height: '100%', justifyContent: 'center' }}>
+                    <Animated.Text style={{textAlign: 'center', fontSize: 30, color: 'white', fontWeight: 'bold', marginTop: 100, backgroundColor: 'lightblue', opacity: textOpacity }}>
                         Toca la pantalla para iniciar
                     </Animated.Text>
                 </ImageBackground>
