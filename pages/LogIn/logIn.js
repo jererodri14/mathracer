@@ -2,8 +2,8 @@ import {ImageBackground, TextInput, StyleSheet, Image, Button, Text, View} from 
 
 export default function LogInPage(){
     return(
-        <ImageBackground source={require('../../assets/background.png')} style={{width: '100%', height: '100%', alignItems:'center'}}>
-            <Image resizeMode='contain' source={require('../../assets/icon.png')} style={styles.icon}/>
+        <ImageBackground source={require('../../assets/images/background.png')} style={{width: '100%', height: '100%', alignItems:'center'}}>
+            <Image resizeMode='contain' source={require('../../assets//icons/icon.png')} style={styles.icon}/>
             <View style={{width: 300, alignItems: 'center', marginBottom: 10}}>
                 <Text style={{color: 'white', fontSize: 18, fontWeight: 'bold'}}>Inicia sesión con tus credenciales</Text>
             </View>
