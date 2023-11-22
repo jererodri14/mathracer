@@ -1,7 +1,8 @@
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createStackNavigator } from '@react-navigation/stack'; 
 import WelcomePage from "./pages/welcomePage/welcomePage";
 import LogInPage from "./pages/login/logIn";
+import MainMenuPage from "./pages/mainMenu/mainMenu";
 import { StatusBar } from 'react-native';
 
 export default function App() {
@@ -17,6 +18,6 @@ export default function App() {
   );
 }
 
-const Stack = createNativeStackNavigator();
+const Stack = createStackNavigator();
 
 
