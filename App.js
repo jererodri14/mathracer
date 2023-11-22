@@ -1,14 +1,14 @@
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import WelcomePage from "./pages/welcomePage/welcomePage";
-import LogInPage from "./pages/LogIn/logIn";
-import { StatusBar, AppLoading } from 'react-native';
+import LogInPage from "./pages/login/logIn";
+import { StatusBar } from 'react-native';
 
 export default function App() {
   return (
     <NavigationContainer>
       <StatusBar hidden={true} />
-      <Stack.Navigator>
+      <Stack.Navigator initialRouteName='WelcomePage'>
         <Stack.Screen name="WelcomePage" component={WelcomePage} options={{ headerShown: false }}/>
         <Stack.Screen name="LogIn" component={LogInPage} options={{ headerShown: false }}/>
       </Stack.Navigator>
@@ -17,6 +17,6 @@ export default function App() {
   );
 }
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 
