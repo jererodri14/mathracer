@@ -28,7 +28,7 @@ export default function WelcomePage({navigation}){
     return(
         <View>
             <Pressable onPress={() => navigation.navigate('LogIn')}>
-                <ImageBackground source={require('../../assets/welcome.png')} resizeMode="cover" style={{ height: '100%', justifyContent: 'center' }}>
+                <ImageBackground source={require('../../assets/images/welcome.png')} resizeMode="cover" style={{ height: '100%', justifyContent: 'center' }}>
                     <Animated.Text style={{textAlign: 'center', fontSize: 30, color: 'white', fontWeight: 'bold', marginTop: 100, backgroundColor: 'lightblue', opacity: textOpacity }}>
                         Toca la pantalla para iniciar
                     </Animated.Text>
