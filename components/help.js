@@ -1,9 +1,11 @@
-import { View, Text, StyleSheet } from "react-native";
-import { ImageBackground } from "react-native";
+import { View, Text, StyleSheet, ImageBackground } from "react-native";
+import { useRoute } from "@react-navigation/native";
 import YoutubePlayer from "react-native-youtube-iframe";
 import CustomButton from "./customButton";
 
 export default function Help({navigation}){
+    const route = useRoute();
+    const {videoId, helpText} = route.params;
     return(
         <ImageBackground source={require('../assets/images/background.png')} style={{width: '100%', height: '100%', alignItems:'center', gap: 10}}>
             <View style={styles.top_view}>
@@ -13,9 +15,9 @@ export default function Help({navigation}){
             <YoutubePlayer
                 height={350}
                 width={350}
-                videoId={"p_lNMqG9X7o"}
+                videoId={videoId}
             />
-            <Text style={{fontFamily: 'coiny-regular', fontSize: 20, color: '#fff', textAlign: 'center', margin: 10}}>Aquí tienes una breve ayuda para que puedas resolver el ejercicio</Text>
+            <Text style={{fontFamily: 'coiny-regular', fontSize: 20, color: '#fff', textAlign: 'center', margin: 10}}>{helpText}</Text>
         </ImageBackground>
     );
 }

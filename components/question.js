@@ -1,12 +1,15 @@
 import { ImageBackground, View, StyleSheet, Text, Image, Pressable } from "react-native";
 import CustomButton from "./customButton";
+import Help from "./help";
 
 export default function Question({navigation}){
+    const videoId = '5qap5aO4i9A';
+    const helpText = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatibus.';
     return(
         <ImageBackground source={require('../assets/images/background.png')} style={{width: '100%', height: '100%', alignItems:'center', gap: 10}}>
             <View style={styles.top_view}>
                 <CustomButton iconSrc={require('../assets/icons/back-arrow.png')} viewStyle={ styles.option } onPress={()=> navigation.goBack()}/>
-                <Pressable onPress={()=> navigation.navigate('Help')}>
+                <Pressable onPress={()=> navigation.navigate('Help',{videoId, helpText})}>
                     <Image source={require('../assets/icons/help.png')} style={{width: 50, height: 50}}/>
                 </Pressable>
             </View>
