@@ -1,20 +1,33 @@
 import React from "react";
-import { View, Text, Pressable, StyleSheet } from "react-native";
+import { View, Text, Pressable, StyleSheet, Image } from "react-native";
+import { useEffect } from 'react';
+import * as Font from 'expo-font';
 
 export default function CustomButton(props){
+    useEffect(() => {
+        const loadFontAsync = async () => {
+          await Font.loadAsync({ 
+            'coiny-regular': require('../assets/fonts/Coiny-Regular.ttf'),
+          });
+        };
+    
+        loadFontAsync();
+      }, []);
     return(
         <Pressable onPress={props.onPress}>
-            <View style={[style.view, props.viewStyle]}>
-                <Text style={[style.title, props.titleStyle]}>{props.title}</Text>
+            <View style={[styles.view, props.viewStyle]}>
+                {props.iconSrc != null ? <Image source={props.iconSrc} style={{width: 50, height: 50}} />: null}
+                <Text style={[styles.title, props.titleStyle]}>{props.title}</Text>
             </View>
         </Pressable>
     );
 }
-style = StyleSheet.create({
+styles = StyleSheet.create({
     view: {
         backgroundColor: 'lightblue',
-        padding: 10,
-        elevation: 2,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     title: {
         color: 'white',

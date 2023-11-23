@@ -51,5 +51,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         fontFamily: 'coiny-regular',
+        elevation: 5,
+        borderRadius: 10,
     }
   });

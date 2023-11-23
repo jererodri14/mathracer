@@ -5,26 +5,17 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 
 export default function MainMenuPage({navigation}){
-    useEffect(() => {
-        const backAction = () => {
-          Alert.alert('Espera', 'Estas seguro que quieres salir de MathRacer', [
-            {
-              text: 'Cancelar',
-              onPress: () => null,
-              style: 'cancel',
-            },
-            {text: 'Si', onPress: () => BackHandler.exitApp()},
-          ]);
-          return true;
-        };
     
-        const backHandler = BackHandler.addEventListener(
-          'hardwareBackPress',
-          backAction,
-        );
-    
-        return () => backHandler.remove();
-      }, []);
+    const salir = () => {
+      Alert.alert('Espera', 'Estas seguro que quieres salir de MathRacer', [
+          {
+            text: 'Cancelar',
+            onPress: () => null,
+            style: 'cancel',
+          },
+          {text: 'Si', onPress: () => BackHandler.exitApp()},
+        ]);
+    };
 
     return(
         <ImageBackground 
@@ -55,14 +46,14 @@ export default function MainMenuPage({navigation}){
             <View style={styles.center_view}>
                 <Image style={styles.icon} source={require('../../assets/icons/icon.png')} />
                 <Text style={{color: 'white', fontSize: 30, fontFamily: 'coiny-regular'}}>MATHRACER</Text>
-                <CustomButton viewStyle={styles.button} title="Jugar" onPress={() => navigation.navigate('Categories')} />
-                <CustomButton viewStyle={styles.button} title="Perfil" onPress={() => navigation.navigate('Exit')} />
+                <CustomButton viewStyle={styles.button} title="Jugar" onPress={() => navigation.navigate('Question')} />
+                <CustomButton viewStyle={styles.button} title="Tienda" onPress={() => navigation.navigate('Shop')} />
                 
             </View>
             <View style={{height: 100 ,flexDirection: 'row', gap: 10}}>
-                <CustomButton viewStyle={styles.tab_button} title="Tienda" onPress={() => navigation.navigate('Categories')} />
-                <CustomButton viewStyle={styles.tab_button} title="Ranking" onPress={() => navigation.navigate('Exit')} />
-                <CustomButton viewStyle={styles.tab_button} title="Salir"/>
+                <CustomButton viewStyle={styles.tab_button} title="Perfil" onPress={() => navigation.navigate('Profile')} />
+                <CustomButton viewStyle={styles.tab_button} title="Ranking" onPress={() => navigation.navigate('Ranking')} />
+                <CustomButton viewStyle={styles.tab_button} title="Salir" onPress={salir}/>
             </View>
         </ImageBackground>
     );
@@ -96,6 +87,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         borderRadius: 10,
         fontFamily: 'coiny-regular',
+        elevation: 5,
     },
     tab_button: {
         width: 100,
@@ -105,6 +97,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         borderRadius: 10,
         fontFamily: 'coiny-regular',
+        elevation: 5,
     },
     icon: {
         height: 300,
