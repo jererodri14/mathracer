@@ -11,12 +11,7 @@ export default function Help({navigation}){
             <View style={styles.top_view}>
                     <CustomButton iconSrc={require('../assets/icons/back-arrow.png')} viewStyle={ styles.option } onPress={()=> navigation.goBack()}/>
             </View>
-            
-            <YoutubePlayer
-                height={350}
-                width={350}
-                videoId={videoId}
-            />
+            {videoId != undefined ?<YoutubePlayer height={350} width={350} videoId={videoId}/>: null}
             <Text style={{fontFamily: 'coiny-regular', fontSize: 20, color: '#fff', textAlign: 'center', margin: 10}}>{helpText}</Text>
         </ImageBackground>
     );
