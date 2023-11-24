@@ -1,10 +1,13 @@
 import { ImageBackground, View, StyleSheet, Text, Image, Pressable } from "react-native";
 import CustomButton from "./customButton";
-import Help from "./help";
+import { useRoute } from '@react-navigation/native';
 
 export default function Question({navigation}){
     const videoId = '5qap5aO4i9A';
     const helpText = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatibus.';
+    const route = useRoute();
+    const { questionData } = route.params;
+    const { question, answers } = questionData;
     return(
         <ImageBackground source={require('../assets/images/background.png')} style={{width: '100%', height: '100%', alignItems:'center', gap: 10}}>
             <View style={styles.top_view}>
@@ -14,13 +17,10 @@ export default function Question({navigation}){
                 </Pressable>
             </View>
             <View style={styles.question}>
-                <Text style={[styles.question_text]}>¿Cuál es el nombre del primer presidente de Costa Rica?</Text>
+                <Text style={[styles.question_text]}>{question}</Text>
             </View>
             <View style={styles.answers}>
-                <CustomButton viewStyle={ styles.option} title="José María Castro Madriz" />
-                <CustomButton viewStyle={ styles.option} title="Juan Rafael Mora Porras" />
-                <CustomButton viewStyle={ styles.option } title="Braulio Carrillo Colina" />
-                <CustomButton viewStyle={ styles.option } title="Juanito Mora Porras" />
+                {answers.map(answer => <CustomButton viewStyle={ styles.option} title={answer.option} key={answer.option} isOption={true} isCorrect={answer.isCorrect}/>)}
             </View>
             <View style={styles.bottom_view}>
                 <CustomButton viewStyle={ styles.icons } iconSrc={require('../assets/icons/comodin.png')} title='x1'/>
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     },
     option: {
         height: 50,
-        backgroundColor: '#669cc4',
+        //backgroundColor: '#669cc4',
         borderRadius: 10,
         fontFamily: 'coiny-regular',
         elevation: 5,

@@ -1,7 +1,8 @@
-import { useEffect } from 'react';
 import { View, Image, ImageBackground, BackHandler,Text, StyleSheet, Alert} from 'react-native';
 import  CustomButton  from '../../components/customButton';
 import { LinearGradient } from 'expo-linear-gradient';
+import categories from '../../data/questions';
+import data from '../../data/questions';
 
 
 export default function MainMenuPage({navigation}){
@@ -16,7 +17,8 @@ export default function MainMenuPage({navigation}){
           {text: 'Si', onPress: () => BackHandler.exitApp()},
         ]);
     };
-
+    const { levels } = data[0];
+    const { questions } = levels[0];
     return(
         <ImageBackground 
             source={require('../../assets/images/background.png')} 
@@ -46,7 +48,7 @@ export default function MainMenuPage({navigation}){
             <View style={styles.center_view}>
                 <Image style={styles.icon} source={require('../../assets/icons/icon.png')} />
                 <Text style={{color: 'white', fontSize: 30, fontFamily: 'coiny-regular'}}>MATHRACER</Text>
-                <CustomButton viewStyle={styles.button} title="Jugar" onPress={() => navigation.navigate('Question')} />
+                <CustomButton viewStyle={styles.button} title="Jugar" onPress={() => navigation.navigate('Question', {questionData: questions[0]})} />
                 <CustomButton viewStyle={styles.button} title="Tienda" onPress={() => navigation.navigate('Shop')} />
                 
             </View>
