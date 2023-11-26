@@ -1,18 +1,11 @@
 import { ImageBackground, View, StyleSheet, Text, Image, Pressable } from "react-native";
 import CustomButton from "./customButton";
-import Level from "./level";
-import { useState } from 'react';
+import { useRoute } from "@react-navigation/native";
 
-export default function Category({ navigation }) {
+export default function Level({ navigation }) {
 
-    const [levelsStatus, setLevelsStatus] = useState([
-        { levelsStatus: 'D', difficulty: 'facil', levelNumber: 1 },
-        { levelsStatus: 'D', difficulty: 'facil', levelNumber: 2 },
-        { levelsStatus: 'B', difficulty: 'medio', levelNumber: 3 },
-        { levelsStatus: 'B', difficulty: 'medio', levelNumber: 4 },
-        { levelsStatus: 'B', difficulty: 'dificil', levelNumber: 5 },
-        { levelStatus: 'B', difficulty: 'dificil', levelNumber: 6 }
-    ]);
+    const route = useRoute();
+    const { levelsStatus } = route.params;
 
 
     return (
@@ -21,21 +14,34 @@ export default function Category({ navigation }) {
                 <CustomButton iconSrc={require('../assets/icons/back-arrow.png')} viewStyle={styles.option} onPress={() => navigation.goBack()} />
             </View>
             <View style={styles.container}>
-                <View style={styles.row}>
-                    <CustomButton title="Sumas" viewStyle={styles.category} titleStyle={styles.title} onPress={() => navigation.navigate('Level',
-                        { levelsStatus: levelsStatus })} />
-                    <CustomButton title="Restas" viewStyle={styles.category} titleStyle={styles.title} />
-                </View>
-                <View style={styles.row}>
-                    <CustomButton title="División" viewStyle={styles.category} titleStyle={styles.title} />
-                    <CustomButton title="Multip." viewStyle={styles.category} titleStyle={styles.title} />
-                </View>
+                {[...Array(Math.ceil(levelsStatus.length / 2))].map((_, rowIndex) => (
+                    <View key={rowIndex} style={styles.row}>
+                        {levelsStatus.slice(rowIndex * 2, rowIndex * 2 + 2).map((item, colIndex) => (
+                            <CustomButton
+                                key={rowIndex * 2 + colIndex}
+                                viewStyle={{ ...styles.level, backgroundColor: getColor(item.difficulty) }}
+                                titleStyle={styles.title}
+                                title={item.levelsStatus === "D" ? item.levelNumber : ''}
+                                onPress={() => navigation.navigate('Question')}
+                                iconSrc={item.levelsStatus !== "D" ? require('../assets/icons/padlock.png') : null}
+                            />
+                        ))}
+                    </View>
+                ))}
             </View>
         </ImageBackground>
     );
 }
 
+const getColor = (difficulty) => {
+    const colors = {
+        'facil': '#36CE3D',
+        'medio': '#FFF618',
+        'dificil': '#FF0C0C'
+    };
 
+    return colors[difficulty];
+}
 
 const styles = StyleSheet.create({
     container: {
@@ -48,8 +54,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         marginVertical: 10,
     },
-    category: {
-        backgroundColor: 'orange',
+    level: {
         borderRadius: 15,
         flexDirection: 'row',
         alignItems: 'center',
