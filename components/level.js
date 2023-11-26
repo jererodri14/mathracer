@@ -22,7 +22,7 @@ export default function Level({ navigation }) {
                                 viewStyle={{ ...styles.level, backgroundColor: getColor(item.difficulty) }}
                                 titleStyle={styles.title}
                                 title={item.levelsStatus === "D" ? item.levelNumber : ''}
-                                onPress={() => navigation.navigate('Question')}
+                                onPress={() => navigation.navigate('ProgressBar')}
                                 iconSrc={item.levelsStatus !== "D" ? require('../assets/icons/padlock.png') : null}
                             />
                         ))}
