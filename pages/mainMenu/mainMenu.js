@@ -1,66 +1,66 @@
 import { useEffect } from 'react';
-import { View, Image, ImageBackground, BackHandler,Text, StyleSheet, Alert} from 'react-native';
-import  CustomButton  from '../../components/customButton';
+import { View, Image, ImageBackground, BackHandler, Text, StyleSheet, Alert } from 'react-native';
+import CustomButton from '../../components/customButton';
 import { LinearGradient } from 'expo-linear-gradient';
 
 
-export default function MainMenuPage({navigation}){
-    
+export default function MainMenuPage({ navigation }) {
+
     const salir = () => {
-      Alert.alert('Espera', 'Estas seguro que quieres salir de MathRacer', [
-          {
-            text: 'Cancelar',
-            onPress: () => null,
-            style: 'cancel',
-          },
-          {text: 'Si', onPress: () => BackHandler.exitApp()},
+        Alert.alert('Espera', 'Estas seguro que quieres salir de MathRacer', [
+            {
+                text: 'Cancelar',
+                onPress: () => null,
+                style: 'cancel',
+            },
+            { text: 'Si', onPress: () => BackHandler.exitApp() },
         ]);
     };
 
-    return(
-        <ImageBackground 
-            source={require('../../assets/images/background.png')} 
-            style={{width: '100%', height: '100%', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center',}}
-            >
+    return (
+        <ImageBackground
+            source={require('../../assets/images/background.png')}
+            style={{ width: '100%', height: '100%', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center', }}
+        >
 
             <View style={styles.top_view}>
                 <LinearGradient colors={['#2c4163', '#2b596e']} style={styles.top_view}>
 
                     <View style={styles.top_view_childs}>
-                        <Image style={styles.icons}source={require('../../assets/icons/gold-coin.png')} />
-                        <Text style={{color: 'white',fontFamily: 'coiny-regular'}}>3000</Text>
+                        <Image style={styles.icons} source={require('../../assets/icons/gold-coin.png')} />
+                        <Text style={{ color: 'white', fontFamily: 'coiny-regular' }}>3000</Text>
                     </View>
 
-                    <View style={[styles.top_view_childs, flexDirection='column']}>
-                        <Image style={[styles.icons]}source={require('../../assets/icons/user.png')} />
-                        <Text style={{color: 'white',fontFamily: 'coiny-regular'}}>User</Text>
+                    <View style={[styles.top_view_childs, flexDirection = 'column']}>
+                        <Image style={[styles.icons]} source={require('../../assets/icons/user.png')} />
+                        <Text style={{ color: 'white', fontFamily: 'coiny-regular' }}>User</Text>
                     </View>
 
                     <View style={styles.top_view_childs}>
-                        <Image style={styles.icons}source={require('../../assets/icons/heart.png')} />
-                        <Text style={{color: 'white',fontFamily: 'coiny-regular'}}>3</Text>
+                        <Image style={styles.icons} source={require('../../assets/icons/heart.png')} />
+                        <Text style={{ color: 'white', fontFamily: 'coiny-regular' }}>3</Text>
                     </View>
                 </LinearGradient>
             </View>
 
             <View style={styles.center_view}>
                 <Image style={styles.icon} source={require('../../assets/icons/icon.png')} />
-                <Text style={{color: 'white', fontSize: 30, fontFamily: 'coiny-regular'}}>MATHRACER</Text>
-                <CustomButton viewStyle={styles.button} title="Jugar" onPress={() => navigation.navigate('Question')} />
+                <Text style={{ color: 'white', fontSize: 30, fontFamily: 'coiny-regular' }}>MATHRACER</Text>
+                <CustomButton viewStyle={styles.button} title="Jugar" onPress={() => navigation.navigate('Category')} />
                 <CustomButton viewStyle={styles.button} title="Tienda" onPress={() => navigation.navigate('Shop')} />
-                
+
             </View>
-            <View style={{height: 100 ,flexDirection: 'row', gap: 10}}>
+            <View style={{ height: 100, flexDirection: 'row', gap: 10 }}>
                 <CustomButton viewStyle={styles.tab_button} title="Perfil" onPress={() => navigation.navigate('Profile')} />
                 <CustomButton viewStyle={styles.tab_button} title="Ranking" onPress={() => navigation.navigate('Ranking')} />
-                <CustomButton viewStyle={styles.tab_button} title="Salir" onPress={salir}/>
+                <CustomButton viewStyle={styles.tab_button} title="Salir" onPress={salir} />
             </View>
         </ImageBackground>
     );
 }
 
 const styles = StyleSheet.create({
-    top_view:{
+    top_view: {
         width: '100%',
         flexDirection: 'row',
         height: 100,
