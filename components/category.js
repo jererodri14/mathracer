@@ -1,20 +1,19 @@
 import { ImageBackground, View, StyleSheet, Text } from "react-native";
 import CustomButton from "./customButton";
 
-import { getUsersLevels } from '../enpoints/category';
+import { getUsersLevels } from '../endpoints/category';
 import { useEffect, useState } from "react";
 import { useSession } from '../session/sessionContext';
 
 
 export default function Category({ navigation }) {
-    const [data, setData] = useState(null);
-    const { userData } = useSession();
+    const { userData, setLevelData, userLevelData  } = useSession();
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const levelData = await getUsersLevels(userData.nombreUsuario);
-                setData(levelData);
+                setLevelData(levelData);
             } catch (error) {
                 console.log(error);
             }
@@ -27,20 +26,22 @@ export default function Category({ navigation }) {
 
     const handleButtonPress = (categoryName) => {
         try {
-            const foundCategory = data.find(category => category.nombre.toLowerCase() === categoryName.toLowerCase());
+            const foundCategory = userLevelData.find(category => category.nombre.toLowerCase() === categoryName.toLowerCase());
 
             if (!foundCategory) {
-                console.log('data', data);
+                console.log('data', userLevelData);
                 return [];
             }
 
             const transformedData = foundCategory.niveles.map(nivel => ({
                 levelsStatus: nivel.estado,
                 difficulty: nivel.dificultad,
-                levelNumber: nivel.numero
+                levelNumber: nivel.numero,
+                levelId: nivel.niveles_id,
+                questions: nivel.preguntas,
             }));
 
-            navigation.navigate('Level', { levelsStatus: transformedData });
+            navigation.navigate('Level', { levelsStatus: transformedData, category: foundCategory.nombre});
 
         } catch (error) {
             console.error('Error al obtener datos:', error);

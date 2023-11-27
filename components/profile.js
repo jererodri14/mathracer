@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ImageBackground, StyleSheet, Modal, View, Text } from "react-native";
 import CustomButton from "./customButton";
 import { useSession } from '../session/sessionContext';
-import { putUserAvatar } from '../enpoints/user';
+import { putUserAvatar } from '../endpoints/user';
 import { getAvatar, getAvatarLenght, getAllAvatars } from '../assets/avatars/avatars'
 
 export default function Profile({ navigation }) {

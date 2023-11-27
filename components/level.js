@@ -5,7 +5,7 @@ import { useRoute } from "@react-navigation/native";
 export default function Level({ navigation }) {
 
     const route = useRoute();
-    const { levelsStatus } = route.params;
+    const {category, levelsStatus } = route.params;
 
 
     return (
@@ -25,7 +25,7 @@ export default function Level({ navigation }) {
                                 viewStyle={{ ...styles.level, backgroundColor: getColor(item.difficulty) }}
                                 titleStyle={styles.title}
                                 title={item.levelsStatus === "D" ? item.levelNumber : ''}
-                                onPress={() => navigation.navigate('ProgressBar')}
+                                onPress={() => navigation.navigate('ProgressBar', { questions: item.questions, category, levelNumber: item.levelNumber })}
                                 iconSrc={item.levelsStatus !== "D" ? require('../assets/icons/padlock.png') : null}
                             />
                         ))}

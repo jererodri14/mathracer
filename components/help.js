@@ -5,14 +5,14 @@ import CustomButton from "./customButton";
 
 export default function Help({navigation}){
     const route = useRoute();
-    const {videoId, helpText} = route.params;
+    const {videoId} = route.params;
     return(
         <ImageBackground source={require('../assets/images/background.png')} style={{width: '100%', height: '100%', alignItems:'center', gap: 10}}>
             <View style={styles.top_view}>
                     <CustomButton iconSrc={require('../assets/icons/back-arrow.png')} viewStyle={ styles.option } onPress={()=> navigation.goBack()}/>
             </View>
             {videoId != undefined ?<YoutubePlayer height={350} width={350} videoId={videoId}/>: null}
-            <Text style={{fontFamily: 'coiny-regular', fontSize: 20, color: '#fff', textAlign: 'center', margin: 10}}>{helpText}</Text>
+            <Text style={{fontFamily: 'coiny-regular', fontSize: 20, color: '#fff', textAlign: 'center', margin: 10}}>Aquí tienes un video relacionado al tema para que te ayudes!</Text>
         </ImageBackground>
     );
 }

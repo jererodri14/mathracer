@@ -4,7 +4,7 @@ import WelcomePage from "./pages/welcomePage/welcomePage";
 import LogInPage from "./pages/LogIn/logIn";
 import MainMenuPage from "./pages/mainMenu/mainMenu";
 import Question from "./components/question";
-import Level from "./pages/level/level";
+import Questions from "./pages/questions/questions";
 import Help from "./components/help";
 import { useEffect } from 'react';
 import * as Font from 'expo-font';
@@ -44,7 +44,7 @@ export default function App() {
             <Stack.Screen name="ProgressBar" component={ProgressBar} options={{ headerShown: false }} />
             <Stack.Screen name="Profile" component={Profile} options={{ headerShown: false }} />
             <Stack.Screen name="SignUp" component={SignUp} options={{ headerShown: false }} />
-            <Stack.Screen name="Level" component={Level} options={{ headerShown: false }}/>
+            <Stack.Screen name="Questions" component={Questions} options={{ headerShown: false }}/>
         </Stack.Group>
           <Stack.Group screenOptions={{ presentation: 'modal' }}>
             <Stack.Screen name="Help" component={Help} options={{ headerShown: false }} />

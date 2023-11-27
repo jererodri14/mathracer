@@ -1,7 +1,7 @@
 import { ImageBackground, TextInput, StyleSheet, Image, Text, View, TouchableOpacity, Keyboard } from 'react-native';
 import CustomButton from '../../components/customButton';
 import { useSession } from '../../session/sessionContext';
-import { getLogin } from '../../enpoints/login';
+import { getLogin } from '../../endpoints/login';
 import React, { useRef, useState } from 'react';
 
 export default function LogInPage({ navigation }) {

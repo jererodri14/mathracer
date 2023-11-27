@@ -1,7 +1,7 @@
 import { ImageBackground, TextInput, StyleSheet, Text, View, TouchableOpacity, Keyboard } from 'react-native';
 import CustomButton from '../../components/customButton';
 import { useSession } from '../../session/sessionContext';
-import { postUser } from '../../enpoints/user';
+import { postUser } from '../../endpoints/user';
 import React, { useRef, useState } from 'react';
 
 export default function SignUpPage({ navigation }) {
