@@ -8,7 +8,7 @@ export default function Question({ navigation }) {
     return (
         <ImageBackground source={require('../assets/images/background.png')} style={{ width: '100%', height: '100%', alignItems: 'center', gap: 10 }}>
             <View style={styles.top_view}>
-                <CustomButton iconSrc={require('../assets/icons/back-arrow.png')} viewStyle={styles.option} onPress={() => navigation.goBack()} />
+                <CustomButton iconSrc={require('../assets/icons/back-arrow.png')} viewStyle={styles.option} onPress={() => navigation.pop(2)} />
                 <Pressable onPress={() => navigation.navigate('Help', { videoId, helpText })}>
                     <Image source={require('../assets/icons/help.png')} style={{ width: 50, height: 50 }} />
                 </Pressable>

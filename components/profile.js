@@ -20,6 +20,8 @@ const avatarImages = [
     require('../assets/avatars/15.png'),
 ];
 
+
+
 export default function Profile({ navigation }) {
     const [modalVisible, setModalVisible] = useState(false);
     const [selectedImageIndex, setSelectedImageIndex] = useState(null);
@@ -32,14 +34,20 @@ export default function Profile({ navigation }) {
         setSelectedImageIndex(index === selectedImageIndex ? null : index);
     };
 
+    const getAvatarSelected = (index) => {
+        setImageToSave(avatarImages[index]);
+    };
+
+
     return (
         <ImageBackground source={require('../assets/images/background.png')} style={{ width: '100%', height: '100%', alignItems: 'center', gap: 10 }}>
             <View style={styles.top_view}>
                 <CustomButton iconSrc={require('../assets/icons/back-arrow.png')} viewStyle={styles.option} onPress={() => navigation.goBack()} />
             </View>
             <View style={styles.container}>
-                <CustomButton title="Avatar" viewStyle={styles.circleButton} titleStyle={styles.title} onPress={() => openModal()} />
-                <AvatarsModal isVisible={modalVisible} closeModal={closeModal} handleImagePress={handleImagePress} selectedImageIndex={selectedImageIndex} />
+                <CustomButton title={imageToSave === '' ? "Avatar" : null} iconSrc={imageToSave} iconStyle={{ width: '100%', height: '100%', marginBottom: 10 }} viewStyle={styles.circleButton} titleStyle={styles.title} onPress={() => openModal()} />
+                <AvatarsModal isVisible={modalVisible} closeModal={closeModal} handleImagePress={handleImagePress} selectedImageIndex={selectedImageIndex}
+                    getAvatarSelected={getAvatarSelected} />
             </View>
             <View style={styles.title_view}>
                 <Text style={styles.title}>Usuario</Text>
@@ -54,9 +62,15 @@ export default function Profile({ navigation }) {
     );
 }
 
-const AvatarsModal = ({ isVisible, closeModal, handleImagePress, selectedImageIndex }) => {
+const AvatarsModal = ({ isVisible, closeModal, handleImagePress, selectedImageIndex, getAvatarSelected }) => {
     const imagesPerRow = 3;
     const rows = Math.ceil(avatarImages.length / imagesPerRow);
+
+    const handleSaveImage = (index) => {
+        getAvatarSelected(index);
+        closeModal();
+    };
+
 
     const renderImageRow = (rowIndex) => {
         const startIndex = rowIndex * imagesPerRow;
@@ -88,7 +102,7 @@ const AvatarsModal = ({ isVisible, closeModal, handleImagePress, selectedImageIn
                     <Text style={styles.title}>Avatares</Text>
                     {[...Array(rows)].map((_, rowIndex) => renderImageRow(rowIndex))}
                     <View style={styles.modalDisplay}>
-                        <CustomButton title="Guardar" viewStyle={styles.modalButtons} titleStyle={styles.titleButtons} />
+                        <CustomButton title="Guardar" onPress={() => handleSaveImage(selectedImageIndex)} viewStyle={styles.modalButtons} titleStyle={styles.titleButtons} />
                         <CustomButton title="Cerrar" onPress={() => closeModal()} viewStyle={styles.modalButtons} titleStyle={styles.titleButtons} />
                     </View>
                 </View>
