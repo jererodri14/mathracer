@@ -16,7 +16,7 @@ export default function CustomButton(props) {
     return (
         <Pressable onPress={props.onPress}>
             <View style={[styles.view, props.viewStyle]}>
-                {props.iconSrc != null ? <Image source={props.iconSrc} style={{ width: 50, height: 50 }} /> : null}
+                {props.iconSrc != null ? <Image source={props.iconSrc} style={props.iconStyle != null ? props.iconStyle : { width: 50, height: 50 }} /> : null}
                 <Text style={[styles.title, props.titleStyle]}>{props.title}</Text>
             </View>
         </Pressable>

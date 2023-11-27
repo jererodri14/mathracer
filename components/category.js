@@ -1,4 +1,4 @@
-import { ImageBackground, View, StyleSheet, Text, Image, Pressable } from "react-native";
+import { ImageBackground, View, StyleSheet, Text } from "react-native";
 import CustomButton from "./customButton";
 
 import { getUsersLevels } from '../enpoints/category';
