@@ -1,6 +1,4 @@
-
-
-const LEVELS_URL = "http://192.168.0.3:5000/levels";
+const LEVELS_URL = "http://192.168.0.7:5000/levels"; //cambiar por la ip de la pc que corre el backend
 
 export const getUsersLevels = async (userName) => {
     try {
@@ -12,5 +10,3 @@ export const getUsersLevels = async (userName) => {
         throw new Error('Error al obtener los niveles.')
     }
 }
-
-

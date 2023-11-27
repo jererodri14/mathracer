@@ -3,14 +3,17 @@ import CustomButton from "./customButton";
 
 import { getUsersLevels } from '../enpoints/category';
 import { useEffect, useState } from "react";
+import { useSession } from '../session/sessionContext';
+
 
 export default function Category({ navigation }) {
     const [data, setData] = useState(null);
+    const { userData } = useSession();
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const levelData = await getUsersLevels('heizel');
+                const levelData = await getUsersLevels(userData.nombreUsuario);
                 setData(levelData);
             } catch (error) {
                 console.log(error);

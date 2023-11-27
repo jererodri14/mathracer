@@ -1,31 +1,15 @@
 import React, { useState } from 'react';
 import { ImageBackground, StyleSheet, Modal, View, Text } from "react-native";
 import CustomButton from "./customButton";
-
-const avatarImages = [
-    require('../assets/avatars/1.png'),
-    require('../assets/avatars/2.png'),
-    require('../assets/avatars/3.png'),
-    require('../assets/avatars/4.png'),
-    require('../assets/avatars/5.png'),
-    require('../assets/avatars/6.png'),
-    require('../assets/avatars/7.png'),
-    require('../assets/avatars/8.png'),
-    require('../assets/avatars/9.png'),
-    require('../assets/avatars/10.png'),
-    require('../assets/avatars/11.png'),
-    require('../assets/avatars/12.png'),
-    require('../assets/avatars/13.png'),
-    require('../assets/avatars/14.png'),
-    require('../assets/avatars/15.png'),
-];
-
-
+import { useSession } from '../session/sessionContext';
+import { putUserAvatar } from '../enpoints/user';
+import { getAvatar, getAvatarLenght, getAllAvatars } from '../assets/avatars/avatars'
 
 export default function Profile({ navigation }) {
+    const { userData } = useSession();
     const [modalVisible, setModalVisible] = useState(false);
     const [selectedImageIndex, setSelectedImageIndex] = useState(null);
-    const [imageToSave, setImageToSave] = useState('');
+    const [imageToSave, setImageToSave] = useState(getAvatar(userData.avatares_id - 1));
 
     const openModal = () => setModalVisible(true);
     const closeModal = () => setModalVisible(false);
@@ -35,7 +19,7 @@ export default function Profile({ navigation }) {
     };
 
     const getAvatarSelected = (index) => {
-        setImageToSave(avatarImages[index]);
+        setImageToSave(getAvatar(index));
     };
 
 
@@ -45,15 +29,16 @@ export default function Profile({ navigation }) {
                 <CustomButton iconSrc={require('../assets/icons/back-arrow.png')} viewStyle={styles.option} onPress={() => navigation.goBack()} />
             </View>
             <View style={styles.container}>
-                <CustomButton title={imageToSave === '' ? "Avatar" : null} iconSrc={imageToSave} iconStyle={{ width: '100%', height: '100%', marginBottom: 10 }} viewStyle={styles.circleButton} titleStyle={styles.title} onPress={() => openModal()} />
+                <CustomButton iconSrc={imageToSave} iconStyle={{ width: '100%', height: '100%', marginBottom: 10 }} viewStyle={styles.circleButton} titleStyle={styles.title} onPress={() => openModal()} />
                 <AvatarsModal isVisible={modalVisible} closeModal={closeModal} handleImagePress={handleImagePress} selectedImageIndex={selectedImageIndex}
                     getAvatarSelected={getAvatarSelected} />
             </View>
             <View style={styles.title_view}>
-                <Text style={styles.title}>Usuario</Text>
+                <Text style={styles.title}>{userData.nombreUsuario}</Text>
             </View>
             <View style={styles.title_view}>
                 <Text style={styles.title}>Puntos totales</Text>
+                <Text style={styles.title}>{userData.puntos}</Text>
             </View>
             <View style={styles.title_view}>
                 <CustomButton iconSrc={require('../assets/icons/mail.png')} viewStyle={styles.mail} />
@@ -64,9 +49,12 @@ export default function Profile({ navigation }) {
 
 const AvatarsModal = ({ isVisible, closeModal, handleImagePress, selectedImageIndex, getAvatarSelected }) => {
     const imagesPerRow = 3;
-    const rows = Math.ceil(avatarImages.length / imagesPerRow);
+    const rows = Math.ceil(getAvatarLenght() / imagesPerRow);
+    const { userData, setData } = useSession();
 
-    const handleSaveImage = (index) => {
+    const handleSaveImage = async (index) => {
+        await putUserAvatar(userData.nombreUsuario, index + 1);
+        setData({ ...userData, avatares_id: index + 1 });
         getAvatarSelected(index);
         closeModal();
     };
@@ -74,11 +62,11 @@ const AvatarsModal = ({ isVisible, closeModal, handleImagePress, selectedImageIn
 
     const renderImageRow = (rowIndex) => {
         const startIndex = rowIndex * imagesPerRow;
-        const endIndex = Math.min(startIndex + imagesPerRow, avatarImages.length);
+        const endIndex = Math.min(startIndex + imagesPerRow, getAvatarLenght());
 
         return (
             <View key={rowIndex} style={styles.modalDisplay}>
-                {avatarImages.slice(startIndex, endIndex).map((image, index) => (
+                {getAllAvatars().slice(startIndex, endIndex).map((image, index) => (
                     <CustomButton
                         key={startIndex + index}
                         iconSrc={image}
