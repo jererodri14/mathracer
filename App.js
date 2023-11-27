@@ -12,6 +12,8 @@ import Category from './components/category';
 import Level from './components/level';
 import ProgressBar from './components/progress-bar';
 
+
+
 export default function App() {
   useEffect(() => {
     const loadFontAsync = async () => {
