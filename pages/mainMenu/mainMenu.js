@@ -48,7 +48,7 @@ export default function MainMenuPage({navigation}){
             <View style={styles.center_view}>
                 <Image style={styles.icon} source={require('../../assets/icons/icon.png')} />
                 <Text style={{color: 'white', fontSize: 30, fontFamily: 'coiny-regular'}}>MATHRACER</Text>
-                <CustomButton viewStyle={styles.button} title="Jugar" onPress={() => navigation.navigate('Question', {questionData: questions[0]})} />
+                <CustomButton viewStyle={styles.button} title="Jugar" onPress={() => navigation.navigate('Level')} />
                 <CustomButton viewStyle={styles.button} title="Tienda" onPress={() => navigation.navigate('Shop')} />
                 
             </View>
