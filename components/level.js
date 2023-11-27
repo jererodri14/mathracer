@@ -6,6 +6,7 @@ export default function Level({ navigation }) {
 
     const route = useRoute();
     const { levelsStatus } = route.params;
+    console.log('prueba', levelsStatus);
 
 
     return (

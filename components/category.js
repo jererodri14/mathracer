@@ -1,18 +1,48 @@
 import { ImageBackground, View, StyleSheet, Text, Image, Pressable } from "react-native";
 import CustomButton from "./customButton";
-import { useState } from 'react';
+
+import { getUsersLevels } from '../enpoints/category';
+import { useEffect, useState } from "react";
 
 export default function Category({ navigation }) {
+    const [data, setData] = useState(null);
 
-    const [levelsStatus, setLevelsStatus] = useState([
-        { levelsStatus: 'D', difficulty: 'facil', levelNumber: 1 },
-        { levelsStatus: 'D', difficulty: 'facil', levelNumber: 2 },
-        { levelsStatus: 'B', difficulty: 'medio', levelNumber: 3 },
-        { levelsStatus: 'B', difficulty: 'medio', levelNumber: 4 },
-        { levelsStatus: 'B', difficulty: 'dificil', levelNumber: 5 },
-        { levelStatus: 'B', difficulty: 'dificil', levelNumber: 6 }
-    ]);
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const levelData = await getUsersLevels('heizel');
+                setData(levelData);
+            } catch (error) {
+                console.log(error);
+            }
+        };
 
+        fetchData();
+
+    }, []);
+
+
+    const handleButtonPress = (categoryName) => {
+        try {
+            const foundCategory = data.find(category => category.nombre.toLowerCase() === categoryName.toLowerCase());
+
+            if (!foundCategory) {
+                console.log('data', data);
+                return [];
+            }
+
+            const transformedData = foundCategory.niveles.map(nivel => ({
+                levelsStatus: nivel.estado,
+                difficulty: nivel.dificultad,
+                levelNumber: nivel.numero
+            }));
+
+            navigation.navigate('Level', { levelsStatus: transformedData });
+
+        } catch (error) {
+            console.error('Error al obtener datos:', error);
+        }
+    };
 
     return (
         <ImageBackground source={require('../assets/images/background.png')} style={{ width: '100%', height: '100%', alignItems: 'center', gap: 10 }}>
@@ -24,20 +54,17 @@ export default function Category({ navigation }) {
             </View>
             <View style={styles.container}>
                 <View style={styles.row}>
-                    <CustomButton title="Sumas" viewStyle={styles.category} titleStyle={styles.title} onPress={() => navigation.navigate('Level',
-                        { levelsStatus: levelsStatus })} />
-                    <CustomButton title="Restas" viewStyle={styles.category} titleStyle={styles.title} />
+                    <CustomButton title="Sumas" viewStyle={styles.category} titleStyle={styles.title} onPress={() => handleButtonPress('suma')} />
+                    <CustomButton title="Restas" viewStyle={styles.category} titleStyle={styles.title} onPress={() => handleButtonPress('resta')} />
                 </View>
                 <View style={styles.row}>
-                    <CustomButton title="División" viewStyle={styles.category} titleStyle={styles.title} />
-                    <CustomButton title="Multip." viewStyle={styles.category} titleStyle={styles.title} />
+                    <CustomButton title="División" viewStyle={styles.category} titleStyle={styles.title} onPress={() => handleButtonPress('division')} />
+                    <CustomButton title="Multip." viewStyle={styles.category} titleStyle={styles.title} onPress={() => handleButtonPress('multiplicacion')} />
                 </View>
             </View>
         </ImageBackground>
     );
 }
-
-
 
 const styles = StyleSheet.create({
     container: {
