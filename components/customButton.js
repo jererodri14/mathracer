@@ -3,16 +3,16 @@ import { View, Text, Pressable, StyleSheet, Image } from "react-native";
 import { useEffect, useState } from 'react';
 import * as Font from 'expo-font';
 
-export default function CustomButton(props){
+export default function CustomButton(props) {
     const [isPressed, setIsPressed] = useState(false);
 
     useEffect(() => {
         const loadFontAsync = async () => {
-          await Font.loadAsync({ 
-            'coiny-regular': require('../assets/fonts/Coiny-Regular.ttf'),
-          });
+            await Font.loadAsync({
+                'coiny-regular': require('../assets/fonts/Coiny-Regular.ttf'),
+            });
         };
-    
+
         loadFontAsync();
     }, []);
     
@@ -33,7 +33,7 @@ export default function CustomButton(props){
         return(
             <Pressable onPress={props.onPress}>
                 <View style={[styles.view, props.viewStyle]}>
-                    {props.iconSrc != null ? <Image source={props.iconSrc} style={{width: 50, height: 50}} />: null}
+                    {props.iconSrc != null ? <Image source={props.iconSrc} style={props.iconStyle != null ? props.iconStyle : { width: 50, height: 50 }} />: null}
                     <Text style={[styles.title, props.titleStyle]}>{props.title}</Text>
                 </View>
             </Pressable>
