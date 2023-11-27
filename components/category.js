@@ -1,5 +1,6 @@
 import { ImageBackground, View, StyleSheet, Text, Image, Pressable } from "react-native";
 import CustomButton from "./customButton";
+
 import { getUsersLevels } from '../enpoints/category';
 import { useEffect, useState } from "react";
 
@@ -48,6 +49,9 @@ export default function Category({ navigation }) {
             <View style={styles.top_view}>
                 <CustomButton iconSrc={require('../assets/icons/back-arrow.png')} viewStyle={styles.option} onPress={() => navigation.goBack()} />
             </View>
+            <View style={styles.title_view}>
+                <Text style={styles.title}>Categorías</Text>
+            </View>
             <View style={styles.container}>
                 <View style={styles.row}>
                     <CustomButton title="Sumas" viewStyle={styles.category} titleStyle={styles.title} onPress={() => handleButtonPress('suma')} />
@@ -91,6 +95,9 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'center',
         fontFamily: 'coiny-regular',
+    },
+    title_view: {
+        justifyContent: 'center',
     },
     top_view: {
         width: '100%',

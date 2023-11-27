@@ -14,6 +14,9 @@ export default function Level({ navigation }) {
             <View style={styles.top_view}>
                 <CustomButton iconSrc={require('../assets/icons/back-arrow.png')} viewStyle={styles.option} onPress={() => navigation.goBack()} />
             </View>
+            <View style={styles.title_view}>
+                <Text style={styles.title}>Niveles</Text>
+            </View>
             <View style={styles.container}>
                 {[...Array(Math.ceil(levelsStatus.length / 2))].map((_, rowIndex) => (
                     <View key={rowIndex} style={styles.row}>
@@ -72,6 +75,9 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'center',
         fontFamily: 'coiny-regular',
+    },
+    title_view: {
+        justifyContent: 'center',
     },
     top_view: {
         width: '100%',
