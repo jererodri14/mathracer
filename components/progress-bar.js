@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, Text, Image, ImageBackground } from 'react-native';
 import * as Progress from 'react-native-progress';
+import CustomButton from './customButton';
 
 
 export default function ProgressBar({ navigation }) {
@@ -36,6 +37,9 @@ export default function ProgressBar({ navigation }) {
 
     return (
         <ImageBackground source={require('../assets/images/background.png')} style={{ width: '100%', height: '100%', alignItems: 'center', gap: 10 }}>
+            <View style={styles.top_view}>
+                <CustomButton iconSrc={require('../assets/icons/back-arrow.png')} viewStyle={styles.option} onPress={() => navigation.goBack()} />
+            </View>
             <View style={styles.container}>
                 <Image source={require('../assets/images/car.png')}></Image>
                 <Progress.Bar progress={1} style={styles.progressBar} indeterminate={true} height={20} color='#36CE3D' unfilledColor='white' />
@@ -59,5 +63,19 @@ const styles = StyleSheet.create({
         borderColor: "black",
         borderWidth: 5,
         borderRadius: 20
-    }
+    },
+    top_view: {
+        width: '100%',
+        flexDirection: 'row',
+        height: 100,
+        padding: 10,
+        justifyContent: 'space-between',
+    },
+    option: {
+        height: 50,
+        backgroundColor: '#669cc4',
+        borderRadius: 10,
+        fontFamily: 'coiny-regular',
+        elevation: 5,
+    },
 });
