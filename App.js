@@ -11,6 +11,7 @@ import { StatusBar } from 'react-native';
 import Category from './components/category';
 import Level from './components/level';
 import ProgressBar from './components/progress-bar';
+import Profile from './components/profile';
 
 
 
@@ -37,6 +38,7 @@ export default function App() {
           <Stack.Screen name="Category" component={Category} options={{ headerShown: false }} />
           <Stack.Screen name="Level" component={Level} options={{ headerShown: false }} />
           <Stack.Screen name="ProgressBar" component={ProgressBar} options={{ headerShown: false }} />
+          <Stack.Screen name="Profile" component={Profile} options={{ headerShown: false }} />
         </Stack.Group>
         <Stack.Group screenOptions={{ presentation: 'modal' }}>
           <Stack.Screen name="Help" component={Help} options={{ headerShown: false }} />
