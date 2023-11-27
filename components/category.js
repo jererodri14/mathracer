@@ -1,6 +1,5 @@
 import { ImageBackground, View, StyleSheet, Text, Image, Pressable } from "react-native";
 import CustomButton from "./customButton";
-import Level from "./level";
 import { useState } from 'react';
 
 export default function Category({ navigation }) {
@@ -19,6 +18,9 @@ export default function Category({ navigation }) {
         <ImageBackground source={require('../assets/images/background.png')} style={{ width: '100%', height: '100%', alignItems: 'center', gap: 10 }}>
             <View style={styles.top_view}>
                 <CustomButton iconSrc={require('../assets/icons/back-arrow.png')} viewStyle={styles.option} onPress={() => navigation.goBack()} />
+            </View>
+            <View style={styles.title_view}>
+                <Text style={styles.title}>Categorías</Text>
             </View>
             <View style={styles.container}>
                 <View style={styles.row}>
@@ -66,6 +68,9 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'center',
         fontFamily: 'coiny-regular',
+    },
+    title_view: {
+        justifyContent: 'center',
     },
     top_view: {
         width: '100%',
