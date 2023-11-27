@@ -1,11 +1,12 @@
-import { useEffect } from 'react';
 import { View, Image, ImageBackground, BackHandler, Text, StyleSheet, Alert } from 'react-native';
 import CustomButton from '../../components/customButton';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useSession } from '../../session/sessionContext';
+import { getAvatar } from '../../assets/avatars/avatars';
 
 
 export default function MainMenuPage({ navigation }) {
-
+    const { userData } = useSession();
     const salir = () => {
         Alert.alert('Espera', 'Estas seguro que quieres salir de MathRacer', [
             {
@@ -13,7 +14,7 @@ export default function MainMenuPage({ navigation }) {
                 onPress: () => null,
                 style: 'cancel',
             },
-            { text: 'Si', onPress: () => BackHandler.exitApp() },
+            { text: 'Si', onPress: () => { navigation.navigate('WelcomePage'); BackHandler.exitApp() } },
         ]);
     };
 
@@ -28,17 +29,17 @@ export default function MainMenuPage({ navigation }) {
 
                     <View style={styles.top_view_childs}>
                         <Image style={styles.icons} source={require('../../assets/icons/gold-coin.png')} />
-                        <Text style={{ color: 'white', fontFamily: 'coiny-regular' }}>3000</Text>
+                        <Text style={{ color: 'white', fontFamily: 'coiny-regular' }}>{userData.monedas}</Text>
                     </View>
 
                     <View style={[styles.top_view_childs, flexDirection = 'column']}>
-                        <Image style={[styles.icons]} source={require('../../assets/icons/user.png')} />
-                        <Text style={{ color: 'white', fontFamily: 'coiny-regular' }}>User</Text>
+                        <Image style={[styles.icons]} source={getAvatar(userData.avatares_id - 1)} />
+                        <Text style={{ color: 'white', fontFamily: 'coiny-regular' }}>{userData.nombreUsuario}</Text>
                     </View>
 
                     <View style={styles.top_view_childs}>
                         <Image style={styles.icons} source={require('../../assets/icons/heart.png')} />
-                        <Text style={{ color: 'white', fontFamily: 'coiny-regular' }}>3</Text>
+                        <Text style={{ color: 'white', fontFamily: 'coiny-regular' }}>{userData.vidas}</Text>
                     </View>
                 </LinearGradient>
             </View>
